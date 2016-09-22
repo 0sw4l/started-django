@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% block main %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                consultas creadas :  {{ object_list.count }}
+            </h3>
+            <a href="{% url 'crear_consulta' %}" class="btn btn-success btn-lg pull-right">
+                <i class="fa fa-plus"></i> Crear consulta
+            </a>
+        </div>
+        <br><br><br>
+        <div class="col-md-12">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td>paciente</td>
+                        <td>doctor</td>
+                        <td>hora</td>
+                        <td>fecha</td>
+                        <td>acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consulta in object_list %}
+                        <tr>
+                            <td>{{ consulta.paciente }}</td>
+                            <td>{{ consulta.doctor }}</td>
+                            <td>{{ consulta.hora }}</td>
+                            <td>{{ consulta.fecha }}</td>
+                            <td>
+                                <a href="{% url 'modificar_consulta' consulta.id %}" class="btn btn-primary btn-xs">
+                                    <i class="fa fa-pencil"></i> editar
+                                </a>
+                                <a href="{% url 'eliminar_consulta' consulta.id %}" class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash"></i> eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
